@@ -32,7 +32,7 @@ int is_empty(Stack* s){
     return s-> top == NULL;
 }
 
-// adicionar um elemento no topo da linha 
+// adicionar um elemento no topo da pinha 
 void push(Stack* s, int data){
     
     // alocar novo nodo na memória
@@ -86,4 +86,41 @@ int top(Stack* s){
 
     // retornar o topo
     return s->top->data;
+}
+
+int main() {
+    Stack* pilha = init();
+
+    // Inserindo elementos na pilha
+    push(pilha, 10);
+    push(pilha, 20);
+    push(pilha, 30);
+
+    // Mostrando o elemento do topo
+    printf("Topo da pilha: %d\n", top(pilha));
+
+    // Removendo elementos da pilha
+    printf("Elemento removido: %d\n", pop(pilha));
+    printf("Elemento removido: %d\n", pop(pilha));
+
+    // Mostrando o elemento do topo após remoções
+    printf("Topo da pilha: %d\n", top(pilha));
+
+    // Verificando se a pilha está vazia
+    if (is_empty(pilha)) {
+        printf("A pilha está vazia.\n");
+    } else {
+        printf("A pilha não está vazia.\n");
+    }
+
+    // Removendo o último elemento
+    printf("Elemento removido: %d\n", pop(pilha));
+
+    // Tentando remover de uma pilha vazia
+    printf("Elemento removido: %d\n", pop(pilha));
+
+    // Liberando a pilha
+    free(pilha);
+
+    return 0;
 }
