@@ -21,11 +21,11 @@ typedef struct
     Node *top; // apontar para o elemento no topo da pilha
 } Stack;
 
-// criar uma pilhas vazia
+// criar uma pilha vazia
 Stack *init()
 {
 
-    // alocando a pilha positiva na memoria
+    // alocando a pilha na memoria
     Stack *s = (Stack *)malloc(sizeof(Stack));
 
     // passar o descritor como null
