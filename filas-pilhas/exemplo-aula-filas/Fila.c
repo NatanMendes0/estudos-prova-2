@@ -65,6 +65,20 @@ void dequeue(struct fila *desc){
 	}
 }
 
+// Percorrer todos os elementos da fila
+void mostrarFila(struct fila *q) {
+	struct nodo *current = q->inicio;
+	printf("[");
+	while (current != NULL) {
+		printf("%d", current->info);
+		if (current->prox != NULL) {
+			printf(", ");
+		}
+		current = current->prox;
+	}
+	printf("]\n");
+}
+
 int main(){
 
 	struct fila *fila;
@@ -78,14 +92,16 @@ int main(){
 	enqueue(fila, 1);
 
 
-	struct nodo *temp = fila->inicio;
+	// struct nodo *temp = fila->inicio;
 
 	printf("Imprimindo a Fila: \n");
 
-	while(temp!=NULL){
-		printf("%d\n", temp->info);
-		temp = temp->prox;
-	}
+	// while(temp!=NULL){
+	// 	printf("%d\n", temp->info);
+	// 	temp = temp->prox;
+	// }
+
+	mostrarFila(fila);
 
 
 	finalize(fila);
