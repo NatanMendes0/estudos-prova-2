@@ -83,3 +83,105 @@ void dequeue(Queue* q){
  * Aqui vai a função que recebe as duas filas e retorna uma terceira fila que contem os valores de 
  * ambas ordenados 
  */
+
+// receber duas filas ordenadas e criar uma terceira com todos os valores ordenados
+Queue* orderNewQueue(Queue* q1, Queue* q2){
+    Queue* merged = (Queue*)malloc(sizeof(Queue));
+    initQueue(merged);
+    Node *n1 = q1->front;
+    Node *n2 = q2->front;
+
+    while (n1 != NULL && n2 != NULL) {
+        if (n1->data <= n2->data) {
+            enqueue(merged, n1->data);
+            n1 = n1->next;
+        } else {
+            enqueue(merged, n2->data);
+            n2 = n2->next;
+        }
+    }
+    while (n1 != NULL) {
+        enqueue(merged, n1->data);
+        n1 = n1->next;
+    }
+    while (n2 != NULL) {
+        enqueue(merged, n2->data);
+        n2 = n2->next;
+    }
+    return merged;
+}
+
+// imprimir a fila
+void showQueue(Queue* q){
+    Node* current = q->front;
+    printf("[");
+    while (current != NULL){
+        printf("%d", current->data);
+        if(current->next != NULL){
+            printf(", ");
+        }
+        current = current->next;
+    }
+    printf("]\n\n");
+}
+
+// destruir a fila
+void finalize(Queue*q){
+    Node *first, *temp;
+    first = q->front;
+    while(first != NULL){
+        temp = first->next;
+        free(first);
+        first = temp;
+    }
+    free(q);
+}
+
+// função principal
+int main (){
+    // declarar duas filas e alocar seus espaços na memória
+    Queue *f1, *f2;
+    f1 = (Queue*)malloc(sizeof(Queue));
+    f2 = (Queue*)malloc(sizeof(Queue));
+
+    // iniciar as filas
+    initQueue(f1);
+    initQueue(f2);
+
+    // preencher filas com números aleatórios ordenados
+    int i, j;
+    int val = rand() % 10;
+    for (i = 0; i < 10; i++) {
+        val += rand() % 10 + 1; // garante ordem crescente
+        enqueue(f1, val);
+    }
+    val = rand() % 10;
+    for (j = 0; j < 10; j++) {
+        val += rand() % 10 + 1;
+        enqueue(f2, val);
+    }
+
+    // verificar se foi possível criar as filas
+    if(isEmpty(f1) || isEmpty(f2)){
+        printf("Não foi possível criar as filas");
+        return -1;
+    }
+
+    // mostrar as filas antes de mesclar
+    printf("Fila 1:\n");
+    showQueue(f1);    
+    printf("Fila 2:\n");
+    showQueue(f2);
+
+    // chamar função que cria uma fila com o valores de f1 e f2
+    Queue* merged = orderNewQueue(f1, f2);
+    printf("Fila mesclada:\n");
+    showQueue(merged);
+    
+    // destruir filas
+    finalize(f1);
+    finalize(f2);
+    finalize(merged);
+
+    return 0;
+}
