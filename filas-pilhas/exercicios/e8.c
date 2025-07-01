@@ -135,7 +135,8 @@ int main() {
     initQueue(F_Impares);
 
     // exemplo de enfileiramento de valores na fila F
-    for (int i = 0; i <= 20; i++) {
+    int i;
+    for (i = 0; i <= 20; i++) {
         enqueue(F, i);
     }
 
